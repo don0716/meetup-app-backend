@@ -61,6 +61,29 @@ app.get("/events", async (req, res) => {
   }
 });
 
+// find By Id and get data.
+const readById = async (eventId) => {
+  try {
+    const event = await Event.findById(eventId);
+    return event;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+app.get("/events/eventById/:eventid", async (req, res) => {
+  try {
+    const event = await readById(req.params.eventid);
+    if (event) {
+      res.json(event);
+    } else {
+      res.status(401).json({ error: "No Event found " });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 const PORT = 3005;
 app.listen(PORT, () => {
   console.log("Server is running on ", PORT);
