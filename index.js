@@ -39,6 +39,28 @@ app.post("/events", async (req, res) => {
   }
 });
 
+const readAllEvents = async () => {
+  try {
+    const events = await Event.find();
+    return events;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+app.get("events", async (req, res) => {
+  try {
+    const events = await readAllEvents();
+    if (events.length != 0) {
+      res.json(events);
+    } else {
+      res.status(401).json({ error: "No Events Found!" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 const PORT = 3005;
 app.listen(PORT, () => {
   console.log("Server is running on ", PORT);
