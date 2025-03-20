@@ -48,7 +48,7 @@ const readAllEvents = async () => {
   }
 };
 
-app.get("events", async (req, res) => {
+app.get("/events", async (req, res) => {
   try {
     const events = await readAllEvents();
     if (events.length != 0) {
