@@ -13,7 +13,7 @@ app.use(cors(corsOptions));
 
 const { initializeDatabase } = require("./db/db.connect");
 
-const Event = require("./models/event.models");
+const Event = require("./models/event.model");
 
 initializeDatabase();
 
